@@ -1,7 +1,8 @@
+
 /*!
  * d3pie
- * @author Ben Keen
- * @version 0.1.6
+ * @author Ben Keen, dennis woo
+ * @version 0.1.6-patched to allow signed values
  * @date Feb 10 2014
  * @repo http://github.com/benkeen/d3pie
  */
@@ -232,6 +233,7 @@ var validate = {
 				console.log("not valid - should have positive value: ", options.data.content[i]);
 				continue;
 			}
+			console.log("sign = ", options.data.content[i].sign);
 			data.push(options.data.content[i]);
 		}
 		pie.options.data.content = data;
@@ -842,7 +844,7 @@ var labels = {
 			labelGroup.append("text")
 				.attr("id", function(d, i) { return pie.cssPrefix +  "segmentValue" + i + "-" + section; })
 				.attr("class", pie.cssPrefix + "segmentValue-" + section)
-				.text(function(d) { return d.value; })
+				.text(function(d) { return d.sign + d.value; })
 				.style("font-size", settings.value.fontSize + "px")
 				.style("font-family", settings.value.font)
 				.style("fill", settings.value.color);
